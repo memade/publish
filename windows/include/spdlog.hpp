@@ -95,6 +95,9 @@ namespace shared {
 }///namespace shared
 
 
+#define FMT ISpdlog::FORMAT
+
+
 #pragma comment(lib,"spdlog.lib")
 /// /*新生®（上海）**/
 /// /*2022_09_26T22:41:11.7953709Z**/
