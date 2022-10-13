@@ -109,23 +109,30 @@ namespace pchacker {
   End = WXUI_MAIN,
  }UIType;
 
- typedef enum class EnDownActionType : unsigned long long {
+ typedef enum class EnActionType : unsigned long long {
   Normal = 0x0000, // empty action is no handle.
-  Pause = 0x0001,// 暂停任务
-  Start = 0x0002,// 开始
-  Stop = 0x0003,// 暂停或停止任务
-  Remove = 0x0004,// 移除任务
-  Append = 0x0005,// 添加任务
-  Reset = 0x0006,// 任务重置
-  Ready = 0x0007,// 任务已就绪
-  Preparation = 0x0008,// 装备任务
-  InPreparation = 0x0018,// 装备任务
-  Waitinline = 0x0009,// 排队等待
-  Runtime = 0x000A,// 任务运行时|运行中|正在工作
-  Beworking = 0x000A,
-  Running = 0x000A,
+  DownPause = 0x0001,// 暂停任务
+  DownStart = 0x0002,// 开始
+  DownStop = 0x0003,// 暂停或停止任务
+  DownRemove = 0x0004,// 移除任务
+  DownAppend = 0x0005,// 添加任务
+  DownReset = 0x0006,// 任务重置
+  DownReady = 0x0007,// 任务已就绪
+  DownPreparation = 0x0008,// 装备任务
+  DownInPreparation = 0x0018,// 装备任务
+  DownWaitinline = 0x0009,// 排队等待
+  DownRuntime = 0x000A,// 任务运行时|运行中|正在工作
+  DownBeworking = 0x000A,
+  DownRunning = 0x000A,
+  DownFinish = 0x000B,// 下载完成
 
- }DownActionType, EnActionType, EnStatusType;
+  InstallStart = 0x0011,// 开始安装
+  InstallStop = 0x0021,// 停止安装
+  Installing =0x0031,// 正在安装
+  InstallFinish = 0x0041,// 安装完成
+
+
+ }EnActionType, EnStatusType;
 
  enum class EnDockingMessageType : unsigned long long {
   Undefined = 0x0000,
@@ -171,7 +178,7 @@ namespace pchacker {
   virtual void LogoUrl(const std::string&) = 0;
   virtual void LogoPathname(const std::string&) = 0;
   virtual EnActionType Status() const = 0;
-  virtual void Action(const DownActionType&) = 0;
+  virtual void Action(const EnActionType&) = 0;
   virtual bool Verify() const = 0;
   virtual const unsigned int& VipLevel() const = 0;
   virtual void VipLevel(const unsigned int&) = 0;
@@ -242,7 +249,7 @@ namespace pchacker {
   //!@ 状态栏的进度条显示控制
   virtual void UIShowStatusbarProgressCtrl(const bool&) = 0;
   virtual ITaskNode* TaskCreate(const TypeID&) = 0;
-  virtual bool TaskAction(const TypeID&, const DownActionType&) = 0;
+  virtual bool TaskAction(const TypeID&, const EnActionType&) = 0;
   virtual bool TaskDestory(ITaskNode*) = 0;
   virtual bool TaskPerform(ITaskNode*) = 0;
   virtual const std::wstring& SystemDirectoryW() const = 0;
